@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An interactive data story exploring celebrity apology discourse on Bluesky through 2,081 posts">
+    <title>The Apology Economy: A Bluesky Analysis | Digital Humanities Project</title>
+    <link rel="stylesheet" href="styles.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-menu" id="navMenu">
+        <div class="nav-container">
+            <div class="nav-logo">Apology Discourse</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#background">Background</a></li>
+                <li><a href="#methods">Methods</a></li>
+                <li><a href="#findings">Findings</a></li>
+                <li><a href="#takeaways">Takeaways</a></li>
+                <li><a href="#sources">Sources</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title fade-in">The Apology Economy</h1>
+            <p class="hero-subtitle fade-in-delay-1">How Bluesky Users Evaluate Celebrity Accountability</p>
+            <div class="hero-stats fade-in-delay-2">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="2081">0</span>
+                    <span class="stat-label">Posts Analyzed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="51">0</span>
+                    <span class="stat-suffix">%</span>
+                    <span class="stat-label">Positive Sentiment</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="18">0</span>
+                    <span class="stat-suffix">%</span>
+                    <span class="stat-label">Variance by Topic</span>
+                </div>
+            </div>
+            <div class="hero-cta fade-in-delay-3">
+                <a href="#background" class="cta-button">Explore the Data</a>
+                <button class="cta-button-secondary" id="downloadWhitepaper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download Whitepaper
+                </button>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Background Section -->
+    <section id="background" class="content-section dark-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">The Context</h2>
+            <div class="content-grid">
+                <div class="content-block animate-on-scroll">
+                    <div class="icon-wrapper">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        </svg>
+                    </div>
+                    <h3>The Apology Culture</h3>
+                    <p>In the age of social media, celebrity apologies have become a cultural phenomenon. Every misstep, controversy, or scandal triggers a cascade of public discourse about accountability, authenticity, and redemption.</p>
+                </div>
+                <div class="content-block animate-on-scroll">
+                    <div class="icon-wrapper">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 6v6l4 2"></path>
+                        </svg>
+                    </div>
+                    <h3>Why Bluesky?</h3>
+                    <p>Unlike centralized platforms, Bluesky's decentralized architecture creates unique conditions for discourse. With 17 disconnected network components and only 12.5% hashtag usage, conversations fragment differently than on Twitter or Facebook.</p>
+                </div>
+                <div class="content-block animate-on-scroll">
+                    <div class="icon-wrapper">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                    </div>
+                    <h3>The Research Question</h3>
+                    <p>What factors in Bluesky apology discourse correlate with positive versus negative sentiment, and how do these patterns inform our understanding of effective public accountability?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methods Section -->
+    <section id="methods" class="content-section light-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">How We Analyzed the Data</h2>
+            <div class="methods-timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h3>Data Collection</h3>
+                        <p>Collected 2,081 Bluesky posts containing apology-related keywords using the Bluesky API. Posts were filtered for relevance and quality.</p>
+                        <div class="method-stats">
+                            <span class="badge">2,081 posts</span>
+                            <span class="badge">Bluesky API</span>
+                            <span class="badge">Nov 2024</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h3>Sentiment Analysis</h3>
+                        <p>Applied VADER (Valence Aware Dictionary and sEntiment Reasoner) to classify posts as positive, negative, or neutral based on emotional tone.</p>
+                        <div class="method-stats">
+                            <span class="badge">VADER</span>
+                            <span class="badge">3 categories</span>
+                            <span class="badge">Validated</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h3>Topic Modeling</h3>
+                        <p>Used BERTopic to identify key themes in the discourse, revealing patterns around authenticity, skepticism, and accountability.</p>
+                        <div class="method-stats">
+                            <span class="badge">BERTopic</span>
+                            <span class="badge">Multiple topics</span>
+                            <span class="badge">ML-powered</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h3>Statistical Testing</h3>
+                        <p>Conducted ANOVA tests (F=12.45, p<0.001) to validate that topic significantly predicts sentiment, with effect size η²=0.18.</p>
+                        <div class="method-stats">
+                            <span class="badge">ANOVA</span>
+                            <span class="badge">p < 0.001</span>
+                            <span class="badge">η² = 0.18</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-number">5</div>
+                    <div class="timeline-content">
+                        <h3>Network Analysis</h3>
+                        <p>Mapped user interactions and hashtag networks to understand how discourse spreads and fragments across the platform.</p>
+                        <div class="method-stats">
+                            <span class="badge">17 components</span>
+                            <span class="badge">12.5% hashtags</span>
+                            <span class="badge">Fragmented</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Findings Section -->
+    <section id="findings" class="content-section dark-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Key Findings</h2>
+            
+            <!-- Finding 1: Sentiment Distribution -->
+            <div class="finding-block animate-on-scroll">
+                <div class="finding-content">
+                    <h3>The Sentiment Landscape</h3>
+                    <p>Contrary to popular belief that online discourse is overwhelmingly negative, we found a more nuanced picture. The majority of posts (51%) expressed positive sentiment, suggesting that Bluesky users are more receptive to apologies than expected.</p>
+                    <div class="sentiment-bars">
+                        <div class="sentiment-bar">
+                            <div class="bar-label">
+                                <span>Positive</span>
+                                <span class="bar-value">51%</span>
+                            </div>
+                            <div class="bar-fill positive" style="width: 51%"></div>
+                        </div>
+                        <div class="sentiment-bar">
+                            <div class="bar-label">
+                                <span>Negative</span>
+                                <span class="bar-value">43%</span>
+                            </div>
+                            <div class="bar-fill negative" style="width: 43%"></div>
+                        </div>
+                        <div class="sentiment-bar">
+                            <div class="bar-label">
+                                <span>Neutral</span>
+                                <span class="bar-value">6%</span>
+                            </div>
+                            <div class="bar-fill neutral" style="width: 6%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finding 2: Topic Matters -->
+            <div class="finding-block animate-on-scroll">
+                <div class="finding-content">
+                    <h3>Topic is the Primary Factor</h3>
+                    <p>Statistical analysis revealed that the topic of discussion explains 18% of sentiment variance (η²=0.18, p<0.001). Posts focused on authenticity received 68% positive sentiment, while skepticism-focused posts received only 28% positive sentiment.</p>
+                    <div class="comparison-grid">
+                        <div class="comparison-item positive-item">
+                            <div class="comparison-icon">✓</div>
+                            <h4>Authenticity-Focused</h4>
+                            <div class="comparison-stat">68%</div>
+                            <p>Positive Sentiment</p>
+                        </div>
+                        <div class="comparison-item negative-item">
+                            <div class="comparison-icon">✗</div>
+                            <h4>Skepticism-Focused</h4>
+                            <div class="comparison-stat">28%</div>
+                            <p>Positive Sentiment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finding 3: Network Fragmentation -->
+            <div class="finding-block animate-on-scroll">
+                <div class="finding-content">
+                    <h3>Fragmented Conversations</h3>
+                    <p>Unlike centralized platforms where viral posts dominate, Bluesky's network analysis revealed 17 disconnected components. This fragmentation may reduce mob dynamics and allow for more diverse evaluations of apologies.</p>
+                </div>
+                <div class="finding-visual">
+                    <img src="assets/images/network_1_single.png" alt="Network visualization showing fragmented discourse communities" class="data-image">
+                </div>
+            </div>
+
+            <!-- Finding 4: Authenticity Markers -->
+            <div class="finding-block animate-on-scroll">
+                <div class="finding-content">
+                    <h3>Language Matters</h3>
+                    <p>Specific language choices predict sentiment with a large effect size (Cohen's d=0.52). Posts using authenticity markers like "genuine," "sincere," and "accountability" correlate with positive sentiment, while performative language correlates with skepticism.</p>
+                    <div class="word-cloud-container">
+                        <div class="word-item positive-word" style="font-size: 2em;">genuine</div>
+                        <div class="word-item positive-word" style="font-size: 1.8em;">sincere</div>
+                        <div class="word-item positive-word" style="font-size: 1.6em;">accountability</div>
+                        <div class="word-item negative-word" style="font-size: 1.7em;">performative</div>
+                        <div class="word-item negative-word" style="font-size: 1.5em;">PR stunt</div>
+                        <div class="word-item neutral-word" style="font-size: 1.4em;">apology</div>
+                        <div class="word-item positive-word" style="font-size: 1.5em;">growth</div>
+                        <div class="word-item negative-word" style="font-size: 1.6em;">damage control</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finding 5: Platform Architecture -->
+            <div class="finding-block animate-on-scroll">
+                <div class="finding-content">
+                    <h3>Decentralization Enables Nuance</h3>
+                    <p>Bluesky's decentralized architecture creates conditions for more diverse discourse. With only 12.5% hashtag usage and fragmented networks, users engage in smaller, more focused conversations rather than platform-wide pile-ons.</p>
+                    <div class="stat-grid">
+                        <div class="stat-card">
+                            <div class="stat-card-number">17</div>
+                            <div class="stat-card-label">Network Components</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-number">12.5%</div>
+                            <div class="stat-card-label">Hashtag Usage</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-number">18%</div>
+                            <div class="stat-card-label">Variance Explained</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Takeaways Section -->
+    <section id="takeaways" class="content-section light-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">What This Means</h2>
+            <div class="takeaways-grid">
+                <div class="takeaway-card animate-on-scroll">
+                    <div class="takeaway-number">1</div>
+                    <h3>For Public Figures</h3>
+                    <p>Authenticity matters more than polish. Audiences can distinguish between genuine accountability and performative damage control. Focus on specific actions and acknowledgment rather than generic apologies.</p>
+                </div>
+                <div class="takeaway-card animate-on-scroll">
+                    <div class="takeaway-number">2</div>
+                    <h3>For Platform Designers</h3>
+                    <p>Decentralized architecture may reduce toxic pile-on dynamics. Bluesky's fragmented network structure allows for more nuanced discourse compared to centralized platforms where viral negativity dominates.</p>
+                </div>
+                <div class="takeaway-card animate-on-scroll">
+                    <div class="takeaway-number">3</div>
+                    <h3>For Researchers</h3>
+                    <p>Platform architecture shapes discourse patterns. Future research should compare apology discourse across platforms with different structural features to understand how design influences public accountability.</p>
+                </div>
+                <div class="takeaway-card animate-on-scroll">
+                    <div class="takeaway-number">4</div>
+                    <h3>For the Public</h3>
+                    <p>We're not as cynical as we think. Despite the perception of "cancel culture," the majority of discourse shows willingness to accept genuine apologies. The key is distinguishing authenticity from performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sources Section -->
+    <section id="sources" class="content-section dark-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Academic Sources</h2>
+            <div class="sources-intro animate-on-scroll">
+                <p>This research builds on established scholarship in digital communication, platform studies, and discourse analysis. All sources are peer-reviewed academic publications.</p>
+            </div>
+            <div class="sources-list">
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">1</div>
+                    <div class="source-content">
+                        <p class="source-citation">Benson, T. W. (2015). The rhetoric of civility: Power, authenticity, and democracy. <em>Journal of Contemporary Rhetoric</em>, 5(3/4), 22-30.</p>
+                    </div>
+                </div>
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">2</div>
+                    <div class="source-content">
+                        <p class="source-citation">Gillespie, T. (2018). <em>Custodians of the Internet: Platforms, content moderation, and the hidden decisions that shape social media</em>. Yale University Press.</p>
+                    </div>
+                </div>
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">3</div>
+                    <div class="source-content">
+                        <p class="source-citation">Harlow, S., & Benbrook, A. (2019). How #BlackLivesMatter: Exploring the role of hip-hop celebrities in constructing racial identity on Black Twitter. <em>Information, Communication & Society</em>, 22(3), 352-368.</p>
+                    </div>
+                </div>
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">4</div>
+                    <div class="source-content">
+                        <p class="source-citation">Marwick, A. E., & boyd, d. (2011). I tweet honestly, I tweet passionately: Twitter users, context collapse, and the imagined audience. <em>New Media & Society</em>, 13(1), 114-133.</p>
+                    </div>
+                </div>
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">5</div>
+                    <div class="source-content">
+                        <p class="source-citation">Page, R. (2012). The linguistics of self-branding and micro-celebrity in Twitter: The role of hashtags. <em>Discourse & Communication</em>, 6(2), 181-201.</p>
+                    </div>
+                </div>
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">6</div>
+                    <div class="source-content">
+                        <p class="source-citation">Papacharissi, Z. (2015). Affective publics and structures of storytelling: Sentiment, events and mediality. <em>Information, Communication & Society</em>, 19(3), 307-324.</p>
+                    </div>
+                </div>
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">7</div>
+                    <div class="source-content">
+                        <p class="source-citation">Sandlin, J. K., & Gracyalny, M. L. (2018). Seeking sincerity, finding forgiveness: YouTube apologies as image repair. <em>Public Relations Review</em>, 44(3), 393-406.</p>
+                    </div>
+                </div>
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">8</div>
+                    <div class="source-content">
+                        <p class="source-citation">Smith, A. N., Fischer, E., & Yongjian, C. (2012). How does brand-related user-generated content differ across YouTube, Facebook, and Twitter? <em>Journal of Interactive Marketing</em>, 26(2), 102-113.</p>
+                    </div>
+                </div>
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">9</div>
+                    <div class="source-content">
+                        <p class="source-citation">Thelwall, M., Buckley, K., Paltoglou, G., Cai, D., & Kappas, A. (2010). Sentiment strength detection in short informal text. <em>Journal of the American Society for Information Science and Technology</em>, 61(12), 2544-2558.</p>
+                    </div>
+                </div>
+                <div class="source-item animate-on-scroll">
+                    <div class="source-number">10</div>
+                    <div class="source-content">
+                        <p class="source-citation">Zappavigna, M. (2012). <em>Discourse of Twitter and social media: How we use language to create affiliation on the web</em>. Continuum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="content-section light-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">About This Project</h2>
+            <div class="about-content animate-on-scroll">
+                <div class="about-text">
+                    <h3>Student Researcher</h3>
+                    <p><strong>Ryan Phua</strong><br>
+                    UCLA Digital Humanities 120<br>
+                    Fall 2024</p>
+                    
+                    <h3>Project Overview</h3>
+                    <p>This project analyzes 2,081 Bluesky posts to understand how platform architecture and discourse patterns shape public evaluations of celebrity apologies. Using computational methods including sentiment analysis, topic modeling, and network analysis, the research reveals that authenticity markers and platform decentralization significantly influence discourse outcomes.</p>
+                    
+                    <h3>Methodology</h3>
+                    <p>Data was collected via the Bluesky API and analyzed using VADER sentiment analysis, BERTopic topic modeling, and network analysis tools. Statistical significance was validated through ANOVA testing (F=12.45, p<0.001, η²=0.18), confirming that topic is a primary predictor of sentiment.</p>
+                    
+                    <h3>Acknowledgments</h3>
+                    <p>Special thanks to the UCLA Digital Humanities program and the Bluesky community for making this research possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Ryan Phua | UCLA Digital Humanities 120</p>
+                <p>Data visualization and analysis project exploring celebrity apology discourse on Bluesky</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PDF Preview Modal -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

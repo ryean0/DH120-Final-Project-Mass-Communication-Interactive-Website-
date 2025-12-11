@@ -172,7 +172,8 @@ body {
     align-items: center;
     text-align: center;
     padding: 2rem;
-    background: var(--bg-darker);
+    background: linear-gradient(rgba(5, 8, 17, 0.85), rgba(10, 14, 39, 0.85)), 
+                url('assets/backgrounds/hero.jpg') center/cover no-repeat fixed;
     position: relative;
     overflow: hidden;
 }
@@ -184,13 +185,27 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle at 50% 50%, rgba(0, 217, 255, 0.15) 0%, transparent 50%);
     pointer-events: none;
+    z-index: 1;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(10, 14, 39, 0.3) 100%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .hero-content {
     max-width: 1200px;
-    z-index: 1;
+    z-index: 2;
+    position: relative;
 }
 
 .hero-title {
@@ -376,6 +391,109 @@ body {
     background: var(--bg-dark);
 }
 
+/* Section-specific backgrounds */
+#background {
+    background: linear-gradient(rgba(10, 14, 39, 0.92), rgba(10, 14, 39, 0.92)), 
+                url('assets/backgrounds/background.jpg') center/cover no-repeat fixed;
+    position: relative;
+}
+
+#background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(0, 217, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+#methods {
+    background: linear-gradient(rgba(5, 8, 17, 0.92), rgba(5, 8, 17, 0.92)), 
+                url('assets/backgrounds/methods.jpg') center/cover no-repeat fixed;
+    position: relative;
+}
+
+#methods::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+#findings {
+    background: linear-gradient(rgba(10, 14, 39, 0.92), rgba(10, 14, 39, 0.92)), 
+                url('assets/backgrounds/findings.jpg') center/cover no-repeat fixed;
+    position: relative;
+}
+
+#findings::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(0, 217, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+#takeaways {
+    background: linear-gradient(rgba(5, 8, 17, 0.92), rgba(5, 8, 17, 0.92)), 
+                url('assets/backgrounds/takeaways.jpg') center/cover no-repeat fixed;
+    position: relative;
+}
+
+#takeaways::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 70%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+#sources {
+    background: linear-gradient(rgba(10, 14, 39, 0.92), rgba(10, 14, 39, 0.92)), 
+                url('assets/backgrounds/sources.jpg') center/cover no-repeat fixed;
+    position: relative;
+}
+
+#sources::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+#about {
+    background: linear-gradient(rgba(5, 8, 17, 0.92), rgba(5, 8, 17, 0.92)), 
+                url('assets/backgrounds/about.jpg') center/cover no-repeat fixed;
+    position: relative;
+}
+
+#about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 70%, rgba(0, 217, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
 .light-section {
     background: var(--bg-darker);
 }
@@ -383,6 +501,8 @@ body {
 .container {
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .section-title {
@@ -1076,6 +1196,17 @@ body {
     .cta-button-secondary {
         width: 100%;
         justify-content: center;
+    }
+    
+    /* Disable fixed backgrounds on mobile for better performance */
+    .hero-section,
+    #background,
+    #methods,
+    #findings,
+    #takeaways,
+    #sources,
+    #about {
+        background-attachment: scroll !important;
     }
 }
 
